@@ -1,0 +1,15 @@
+{
+  "name": "education-main",
+  "version": "1.0.0",
+  "description": "Collaboration for my **GitHub students** (Batch-1)<br> WEBSITE : **https://business.aungttant.com** # Live Demo Demo Link : **https://aungttant.github.io/Education/** # Collaborators **Aung T Tant** - https://github.com/aungttant<br> **Kim Boih** - https://github.com/kimboih<br> **AungPyaeKo** - https://github.com/AungPyaeKo<br> **AungPhyoHein** - https://github.com/AungPhyoHein<br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}

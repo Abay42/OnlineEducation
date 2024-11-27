@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="icon" href="../image/top1.png" type="image/x-icon">
+    <script src="../javascript/javascript.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+    <title>Общение учителей и студентов</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="imageBox">
+            <div class="imageInn">
+                <a href="../index.html"><img src="../image/top.png" style="margin-left: 1rem;" class="logo"></a>
+            </div>
+            <div class="hoverImg">
+                <a href="../index.html"><img src="../image/Pin-on-Gifs.gif" width="100px" height="100px" style="margin-left: 1rem;"></a>
+            </div>
+        </div>
+        
+        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#nav" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon bg-light"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="nav">
+            <ul class="navbar-nav">
+                <li class="item"><a class="link" href="../index.html">Главная страница</a></li>
+                <li class="item"><a class="link" href="../course/index.html">Курсы</a></li>
+                <li class="item"><a class="link" href="../trainer.html">Преподаватели</a></li>
+                <li class="item current"><a class="link" href="commincation.html">Связь</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container main">
+            <h1 class="text-center mt-4">Коммуникация учителей и студентов</h1>
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h3>Общение с учителями</h3>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="teacherMessage">Написать учителю:</label>
+                            <textarea id="teacherMessage" class="form-control" rows="4" placeholder="Введите сообщение"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h3>Общение между студентами</h3>
+                    <form id="studentForm">
+                        <div class="form-group">
+                            <label for="studentMessage">Сообщение для группы:</label>
+                            <textarea id="studentMessage" class="form-control" rows="4" placeholder="Введите сообщение"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h3>Общедоступные обсуждения</h3>
+                    <div class="discussion-box border p-3">
+                        <p><strong>Учитель Иван Иванов:</strong> Добро пожаловать на курс!</p>
+                        <p><strong>Студент Анна:</strong> Спасибо! Все материалы уже доступны?</p>
+                        <p><strong>Учитель Иван Иванов:</strong> Да, вы можете найти их в разделе "Курсы".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <a href="../index.html"><img src="../image/top.png" style="margin-left: 1rem;"></a>
+        </div>
+
+        <div class="footer-center">
+            <div class="center-link">
+                <a href="#"><i class="fa fa-map-marker"></i></a>
+                <p><span>Казахстан</span>
+                    Павлодар</p>
+            </div>
+
+            <div class="center-link">
+                <a href="tel:87778889910"><i class="fa fa-phone"></i></a>
+                <p>87778889910</p>
+            </div>
+            <div class="center-link">
+                <a href="OnlineEducation@gmail.com"><i class="fa fa-envelope"></i></a>
+                <p><a href="OnlineEducation@gmail.com">OnlineEducation@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>Про нас</span>
+                <strong>Система дистанционного обучения для удобного взаимодействия учителей и студентов.</strong>
+            </p>
+            <div class="footer-icons">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Отправка сообщения
+        document.querySelector('form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+    
+            const sender = prompt("Введите ваше имя:");
+            const content = document.getElementById('teacherMessage').value || document.getElementById('studentMessage').value;
+    
+            if (!content) {
+                alert('Сообщение не может быть пустым!');
+                return;
+            }
+    
+            const messageData = {
+                sender: sender || "Неизвестный отправитель",
+                content,
+                recipient: 'Все' // Можно заменить на конкретного пользователя
+            };
+    
+            try {
+                const response = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(messageData)
+                });
+    
+                if (response.ok) {
+                    alert('Сообщение отправлено!');
+                    document.querySelector('textarea').value = ''; // Очистка поля сообщения
+                } else {
+                    const error = await response.json();
+                    alert('Ошибка: ' + error.error);
+                }
+            } catch (err) {
+                console.error('Ошибка отправки сообщения:', err);
+                alert('Не удалось отправить сообщение.');
+            }
+        });
+    
+        // Загрузка сообщений
+        async function loadMessages() {
+            try {
+                const response = await fetch('/api/messages');
+                const messages = await response.json();
+    
+                const discussionBox = document.querySelector('.discussion-box');
+                discussionBox.innerHTML = ''; // Очистка перед обновлением
+    
+                messages.forEach(msg => {
+                    const msgElement = document.createElement('p');
+                    msgElement.innerHTML = `<strong>${msg.sender}:</strong> ${msg.content}`;
+                    discussionBox.appendChild(msgElement);
+                });
+            } catch (err) {
+                console.error('Ошибка загрузки сообщений:', err);
+            }
+        }
+    
+        // Загрузка сообщений каждые 5 секунд
+        setInterval(loadMessages, 5000);
+        loadMessages();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
